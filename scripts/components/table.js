@@ -68,10 +68,10 @@ export class Table {
                 <td>${item.nazwa}</td>
                 <td>${item.portfel}</td>
                 <td>${item.ilosc}</td>
-                <td>${item.cenaZakupu.toFixed(2)} zł</td>
-                <td>${investmentValue.toFixed(2)} zł</td>
-                <td>${item.dywidendaRoczna.toFixed(2)} zł</td>
-                <td class="net-dividend">${netDividend.toFixed(2)} zł</td>
+                <td>${item.cenaZakupu.toFixed(2)} PLN</td>
+                <td>${investmentValue.toFixed(2)} PLN</td>
+                <td>${item.dywidendaRoczna.toFixed(2)} PLN</td>
+                <td class="net-dividend">${netDividend.toFixed(2)} PLN</td>
             `;
 
             tbody.appendChild(row);
@@ -80,9 +80,9 @@ export class Table {
         tfoot.innerHTML = `
             <tr class="summary-row">
                 <td colspan="4"></td>
-                <td class="total-investment">**Suma Inwestycji:**<br>**${totalInvestment.toFixed(2)} zł**</td>
+                <td class="total-investment">Suma Inwestycji:<br>${totalInvestment.toFixed(2)} PLN</td>
                 <td colspan="1"></td>
-                <td class="total-net-dividend">**Suma Dywidend Netto (Rocznie):**<br>**${totalNetDividend.toFixed(2)} zł**</td>
+                <td class="total-net-dividend">Suma Dywidend Netto (Rocznie):<br>${totalNetDividend.toFixed(2)} PLN</td>
             </tr>
         `;
 
