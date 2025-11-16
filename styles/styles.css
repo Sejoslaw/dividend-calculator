@@ -21,7 +21,6 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     margin: 0;
-    padding: 10px;
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -29,7 +28,6 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 10px;
 }
 
 h1 {
