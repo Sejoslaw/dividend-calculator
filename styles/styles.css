@@ -1,13 +1,19 @@
 /* styles/styles.css */
 
 :root {
-    --primary-color: #3f51b5;
-    --primary-light: #7986cb;
-    --text-color: #212121;
-    --background-color: #f5f5f5;
-    --surface-color: #ffffff;
-    --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    --shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    --primary-color: #5c6bc0;
+    --primary-light: #9fa8da;
+    --text-color: #e0e0e0;
+    --background-color: #121212;
+    --surface-color: #1e1e1e;
+    --border-color: #3a3a3a;
+    --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.26), 0 1px 2px rgba(0, 0, 0, 0.48);
+    --shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.32), 0 3px 6px rgba(0, 0, 0, 0.46);
+    --hover-background: #2a2a2a;
+    --summary-background: #2c2c2c;
+    --positive-color: #66bb6a;
+    --negative-color: #ef5350;
+    --info-color: #42a5f5;
 }
 
 body {
@@ -15,38 +21,51 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     margin: 0;
-    padding: 20px;
+    padding: 10px;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 10px;
 }
 
 h1 {
     color: var(--primary-color);
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    font-size: 1.8em;
 }
 
 .md-card {
     background-color: var(--surface-color);
     border-radius: 8px;
     box-shadow: var(--shadow-medium);
-    padding: 20px;
-    margin-top: 20px;
+    padding: 15px;
+    margin-top: 15px;
     overflow-x: auto;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .md-dropdown {
-    padding: 10px 15px;
-    border: 1px solid var(--primary-light);
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     background-color: var(--surface-color);
     box-shadow: var(--shadow-small);
-    font-size: 16px;
+    font-size: 1em;
+    color: var(--text-color);
     cursor: pointer;
     transition: all 0.3s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%22292.4%22%3E%3Cpath%20fill%3D%22%23e0e0e0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.6-6.4H19A17.6%2017.6%200%200%200%205.4%2069.4c-4.5%204.6-4.5%2012%200%2016.5l128%20128c4.5%204.6%2012%204.6%2016.5%200l128-128c4.5-4.6%204.5-12.1%200-16.5z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
 }
 
 .md-dropdown:focus {
@@ -56,46 +75,108 @@ h1 {
 }
 
 .selection-container {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
+}
+
+.selection-container label {
+    font-weight: 500;
+    margin-bottom: 5px;
 }
 
 .stock-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.9em;
 }
 
 .stock-table th,
 .stock-table td {
-    padding: 12px 15px;
+    padding: 8px 10px;
     text-align: left;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .stock-table thead th {
     background-color: var(--primary-color);
     color: var(--surface-color);
-    font-weight: bold;
+    font-weight: 500;
     text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .stock-table tbody tr:hover {
-    background-color: #e8eaf6;
+    background-color: var(--hover-background);
 }
 
 .stock-table tfoot .summary-row td {
     border-top: 3px solid var(--primary-color);
-    background-color: #e3f2fd;
-    font-size: 1.1em;
-    padding: 15px;
+    background-color: var(--summary-background);
+    font-size: 1em;
+    padding: 10px;
+    font-weight: 500;
+    color: var(--text-color);
 }
 
 .total-net-dividend {
-    color: #4caf50;
+    color: var(--positive-color);
 }
 
 .total-investment {
-    color: #0d47a1;
+    color: var(--info-color);
+}
+
+@media (min-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+    }
+
+    .md-card {
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .md-dropdown {
+        padding: 10px 15px;
+        font-size: 16px;
+        background-position: right 15px center;
+    }
+
+    .selection-container {
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .selection-container label {
+        margin-bottom: 0;
+    }
+
+    .stock-table {
+        font-size: 1em;
+    }
+
+    .stock-table th,
+    .stock-table td {
+        padding: 12px 15px;
+    }
+
+    .stock-table tfoot .summary-row td {
+        font-size: 1.1em;
+        padding: 15px;
+    }
 }
