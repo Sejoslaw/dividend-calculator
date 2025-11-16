@@ -23,10 +23,6 @@ const formatCurrency = (number) => {
 export class Table {
     constructor(containerSelector) {
         this.container = document.querySelector(containerSelector);
-
-        if (!this.container) {
-            throw new Error(`Kontener o selektorze ${containerSelector} nie znaleziony.`);
-        }
     }
 
     render(data) {

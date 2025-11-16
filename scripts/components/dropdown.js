@@ -9,10 +9,6 @@ export class Dropdown {
         this.selectElement.classList.add('md-dropdown');
         this.selectElement.addEventListener('change', (e) => this.onChangeCallback(e.target.value));
 
-        if (!this.container) {
-            throw new Error(`Kontener o selektorze ${containerSelector} nie znaleziony.`);
-        }
-
         this.container.appendChild(this.selectElement);
     }
 
