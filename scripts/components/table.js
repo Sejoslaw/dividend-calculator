@@ -2,12 +2,6 @@
 
 const PIT_RATE = 0.19; // Podatek Belki 19%
 
-/**
- * Zwraca roczny zysk z dywidend po odliczeniu podatku.
- * @param {number} annualDividend Dywidenda na akcję.
- * @param {number} quantity Ilość posiadanych akcji.
- * @returns {number} Zysk po opodatkowaniu.
- */
 const calculateNetDividend = (annualDividend, quantity) => {
     const gross = annualDividend * quantity;
     return gross * (1 - PIT_RATE);
@@ -15,6 +9,14 @@ const calculateNetDividend = (annualDividend, quantity) => {
 
 const formatCurrency = (number) => {
     return new Intl.NumberFormat('pl-PL', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(number);
+};
+
+const formatPercentage = (number) => {
+    return new Intl.NumberFormat('pl-PL', {
+        style: 'percent',
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     }).format(number);
@@ -37,6 +39,12 @@ export class Table {
             return;
         }
 
+        data.forEach(item => {
+            totalInvestment += item.purchasePrice * item.quantity;
+            totalMarketValue += item.currentPrice * item.quantity;
+            totalNetDividend += calculateNetDividend(item.annualDividend, item.quantity);
+        });
+
         const table = document.createElement('table');
         table.classList.add('stock-table', 'md-card');
 
@@ -48,8 +56,10 @@ export class Table {
                     <th>Ilość</th>
                     <th>Średnia Cena Zakupu</th>
                     <th>Wartość Inwestycji</th>
+                    <th>% Udział Kosztu</th> 
                     <th>Bieżąca Cena</th>
                     <th>Aktualna Wycena Akcji</th>
+                    <th>% Udział Wyceny</th> 
                     <th>Dywidenda Brutto (Akcja)</th>
                     <th>Dywidenda Netto (Rocznie)</th>
                 </tr>
@@ -66,9 +76,8 @@ export class Table {
             const investmentValue = item.purchasePrice * item.quantity;
             const marketValue = item.currentPrice * item.quantity;
 
-            totalNetDividend += netDividend;
-            totalInvestment += investmentValue;
-            totalMarketValue += marketValue;
+            const costPercentage = totalInvestment > 0 ? investmentValue / totalInvestment : 0;
+            const marketPercentage = totalMarketValue > 0 ? marketValue / totalMarketValue : 0;
 
             const row = document.createElement('tr');
 
@@ -78,8 +87,10 @@ export class Table {
                 <td>${item.quantity}</td>
                 <td>${formatCurrency(item.purchasePrice)} PLN</td>
                 <td>${formatCurrency(investmentValue)} PLN</td>
+                <td>${formatPercentage(costPercentage)}</td>
                 <td>${formatCurrency(item.currentPrice)} PLN</td>
                 <td>${formatCurrency(marketValue)} PLN</td>
+                <td>${formatPercentage(marketPercentage)}</td>
                 <td>${formatCurrency(item.annualDividend)} PLN</td>
                 <td class="net-dividend">${formatCurrency(netDividend)} PLN</td>
             `;
@@ -89,11 +100,11 @@ export class Table {
 
         tfoot.innerHTML = `
             <tr class="summary-row">
-                <td colspan="4"></td>
+                <td colspan="4"></td> 
                 <td class="total-investment">Suma Inwestycji:<br>${formatCurrency(totalInvestment)} PLN</td>
-                <td colspan="1"></td>
+                <td colspan="2"></td> 
                 <td class="total-market-value">Suma Wyceny Rynkowej:<br>${formatCurrency(totalMarketValue)} PLN</td>
-                <td colspan="1"></td>
+                <td colspan="2"></td> 
                 <td class="total-net-dividend">Suma Dywidend Netto (Rocznie):<br>${formatCurrency(totalNetDividend)} PLN</td>
             </tr>
         `;
