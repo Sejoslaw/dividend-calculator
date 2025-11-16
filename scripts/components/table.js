@@ -76,12 +76,12 @@ export class Table {
                 <td>${item.name}</td>
                 <td>${item.portfolio}</td>
                 <td>${item.quantity}</td>
-                <td>${item.purchasePrice.toFixed(2)} PLN</td>
-                <td>${investmentValue.toFixed(2)} PLN</td>
+                <td>${formatCurrency(item.purchasePrice)} PLN</td>
+                <td>${formatCurrency(investmentValue)} PLN</td>
                 <td>${formatCurrency(item.currentPrice)} PLN</td>
                 <td>${formatCurrency(marketValue)} PLN</td>
-                <td>${item.annualDividend.toFixed(2)} PLN</td>
-                <td class="net-dividend">${netDividend.toFixed(2)} PLN</td>
+                <td>${formatCurrency(item.annualDividend)} PLN</td>
+                <td class="net-dividend">${formatCurrency(netDividend)} PLN</td>
             `;
 
             tbody.appendChild(row);
